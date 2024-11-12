@@ -1,3 +1,11 @@
+const RAWG_API_KEY = '4c67c848c06b406589a1b89459294d37';
+const YOUTUBE_API_KEY = 'AIzaSyDQWonLNrlHk890r1Sct5HxttR3wydHL30';
+const TWITCH_CLIENT_ID = 'jdd09rs52rnps5uvwzpv3rk91oew3v';
+const TWITCH_CLIENT_SECRET = 'l4kx11lgacqomx9kocacz4cuewczda';
+
+let accessToken = null;
+let tokenExpiry = null;
+
 document.getElementById('searchBtn').addEventListener('click', async function() {
     const game = document.getElementById('gameInput').value;
 
@@ -7,7 +15,6 @@ document.getElementById('searchBtn').addEventListener('click', async function() 
     }
 
     try {
-        // Oculta as seções antes de carregar novos dados
         document.querySelector('.gameInfoSection').classList.add('hidden');
         document.querySelector('.trailerSection').classList.add('hidden');
         document.querySelector('.streamsSection').classList.add('hidden');
@@ -29,7 +36,6 @@ document.getElementById('searchBtn').addEventListener('click', async function() 
 
         const streamData = await fetchTwitchStreams(twitchGameId);
 
-        // Exibe as seções após os dados serem carregados com sucesso
         displayGameInfo(gameData);
         displayTrailer(trailerData);
         displayStreams(streamData);
@@ -39,7 +45,7 @@ document.getElementById('searchBtn').addEventListener('click', async function() 
 });
 
 async function fetchGameInfo(game) {
-    const url = `https://api.rawg.io/api/games?search=${game}&key=4c67c848c06b406589a1b89459294d37`;
+    const url = `https://api.rawg.io/api/games?search=${game}&key=${RAWG_API_KEY}`;
     const response = await fetch(url);
     if (!response.ok) throw new Error('Erro na API de jogo');
     const data = await response.json();
@@ -47,20 +53,15 @@ async function fetchGameInfo(game) {
 }
 
 async function fetchYouTubeTrailer(game) {
-    const url = `https://www.googleapis.com/youtube/v3/search?part=snippet&q=${game} trailer&type=video&key=AIzaSyDQWonLNrlHk890r1Sct5HxttR3wydHL30`;
+    const url = `https://www.googleapis.com/youtube/v3/search?part=snippet&q=${game} trailer&type=video&key=${YOUTUBE_API_KEY}`;
     const response = await fetch(url);
     if (!response.ok) throw new Error('Erro na API do YouTube');
     const data = await response.json();
     return data.items[0];
 }
 
-let accessToken = null;
-let tokenExpiry = null;
-
 async function fetchAccessToken() {
-    const clientId = 'jdd09rs52rnps5uvwzpv3rk91oew3v';
-    const clientSecret = '45g9ej9ztkmqwdc2c734tstl2q1mii';
-    const url = `https://id.twitch.tv/oauth2/token?client_id=${clientId}&client_secret=${clientSecret}&grant_type=client_credentials`;
+    const url = `https://id.twitch.tv/oauth2/token?client_id=${TWITCH_CLIENT_ID}&client_secret=${TWITCH_CLIENT_SECRET}&grant_type=client_credentials`;
 
     try {
         const response = await fetch(url, { method: 'POST' });
@@ -88,7 +89,7 @@ async function fetchWithTwitchAuth(url) {
 
         const response = await fetch(url, {
             headers: {
-                'Client-ID': 'jdd09rs52rnps5uvwzpv3rk91oew3v',
+                'Client-ID': TWITCH_CLIENT_ID,
                 'Authorization': `Bearer ${accessToken}`
             }
         });
