@@ -108,3 +108,8 @@ h2, h3 {
 .screenshot-gallery img:hover {
     transform: scale(1.05);
 }
+
+/* Nova classe para ocultar seções inicialmente */
+.hidden {
+    display: none;
+}

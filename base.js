@@ -7,6 +7,11 @@ document.getElementById('searchBtn').addEventListener('click', async function() 
     }
 
     try {
+        // Oculta as seções antes de carregar novos dados
+        document.querySelector('.gameInfoSection').classList.add('hidden');
+        document.querySelector('.trailerSection').classList.add('hidden');
+        document.querySelector('.streamsSection').classList.add('hidden');
+
         const gameData = await fetchGameInfo(game);
         const trailerData = await fetchYouTubeTrailer(game);
 
@@ -15,17 +20,16 @@ document.getElementById('searchBtn').addEventListener('click', async function() 
             return;
         }
 
-        // Encontrar o game_id específico da Twitch com o nome do jogo
-        const twitchGameId = await fetchTwitchGameId(gameData.name); 
+        const twitchGameId = await fetchTwitchGameId(gameData.name);
 
         if (!twitchGameId) {
             alert("Jogo não encontrado no Twitch.");
             return;
         }
 
-        // Encontrar transmissões ao vivo usando o game_id da Twitch
         const streamData = await fetchTwitchStreams(twitchGameId);
 
+        // Exibe as seções após os dados serem carregados com sucesso
         displayGameInfo(gameData);
         displayTrailer(trailerData);
         displayStreams(streamData);
@@ -50,21 +54,18 @@ async function fetchYouTubeTrailer(game) {
     return data.items[0];
 }
 
-// Variáveis para armazenar o token de acesso e seu tempo de expiração
 let accessToken = null;
 let tokenExpiry = null;
 
-// Função para obter um novo token de acesso
 async function fetchAccessToken() {
     const clientId = 'jdd09rs52rnps5uvwzpv3rk91oew3v';
-    const clientSecret = 'xkub5s5999lt9thpxuotsrw2f42r44';
+    const clientSecret = '45g9ej9ztkmqwdc2c734tstl2q1mii';
     const url = `https://id.twitch.tv/oauth2/token?client_id=${clientId}&client_secret=${clientSecret}&grant_type=client_credentials`;
 
     try {
         const response = await fetch(url, { method: 'POST' });
         const data = await response.json();
 
-        // Verificar se o token foi obtido
         if (response.ok && data.access_token) {
             accessToken = data.access_token;
             tokenExpiry = Date.now() + data.expires_in * 1000;
@@ -79,12 +80,10 @@ async function fetchAccessToken() {
     }
 }
 
-// Função auxiliar para realizar uma requisição autenticada à Twitch
 async function fetchWithTwitchAuth(url) {
     try {
-        // Verifica se o token é válido antes de cada requisição
         if (!accessToken || Date.now() >= tokenExpiry) {
-            await fetchAccessToken(); // Se o token expirar ou não existir, este é renovado
+            await fetchAccessToken();
         }
 
         const response = await fetch(url, {
@@ -113,7 +112,6 @@ async function fetchTwitchGameId(gameName) {
     return data.data.length > 0 ? data.data[0].id : null;
 }
 
-// Função para encontrar transmissões ao vivo no Twitch usando a função auxiliar
 async function fetchTwitchStreams(gameId) {
     const url = `https://api.twitch.tv/helix/streams?game_id=${gameId}`;
     const data = await fetchWithTwitchAuth(url);
@@ -122,21 +120,20 @@ async function fetchTwitchStreams(gameId) {
 
 function displayGameInfo(gameInfo) {
     const infoSection = document.querySelector('.gameInfoSection');
+    infoSection.classList.remove('hidden');
 
     const backgroundImage = gameInfo.background_image 
         ? `<img src="${gameInfo.background_image}" alt="${gameInfo.name} background" style="width: 100%; border-radius: 5px; margin-bottom: 10px;">` 
         : '';
 
-    console.log(gameInfo);
     infoSection.innerHTML = `
         ${backgroundImage}
         <h2>${gameInfo.name}</h2>
-        <p><strong>Plataforms:</strong> ${gameInfo.platforms.map(p => p.platform.name).join(', ')}</p>
-        <p><strong>Genres:</strong> ${gameInfo.genres.map(g => g.name).join(', ')}</p>
-        <p><strong>Average Score:</strong> ${gameInfo.score}%</p>
-        <p><strong>Release Data:</strong> ${new Date(gameInfo.released).toLocaleDateString()}</p>
+        <p><strong>Plataformas:</strong> ${gameInfo.platforms.map(p => p.platform.name).join(', ')}</p>
+        <p><strong>Gêneros:</strong> ${gameInfo.genres.map(g => g.name).join(', ')}</p>
+        <p><strong>Pontuação Média:</strong> ${gameInfo.score}%</p>
+        <p><strong>Data de Lançamento:</strong> ${new Date(gameInfo.released).toLocaleDateString()}</p>
     `;
-
 
     const screenshotGallery = document.createElement('div');
     screenshotGallery.classList.add('screenshot-gallery');
@@ -154,6 +151,7 @@ function displayGameInfo(gameInfo) {
 
 function displayTrailer(youtubeTrailer) {
     const trailerSection = document.querySelector('.trailerSection');
+    trailerSection.classList.remove('hidden');
     trailerSection.innerHTML = `
         <h3>Trailer</h3>
         <iframe width="560" height="315" src="https://www.youtube.com/embed/${youtubeTrailer.id.videoId}" frameborder="0" allowfullscreen></iframe>
@@ -162,7 +160,9 @@ function displayTrailer(youtubeTrailer) {
 
 function displayStreams(twitchStreams) {
     const streamsSection = document.querySelector('.streamsSection');
+    streamsSection.classList.remove('hidden');
     streamsSection.innerHTML = '<h3>Transmissões ao Vivo</h3>';
+    
     if (twitchStreams.length === 0) {
         streamsSection.innerHTML += `<p>Nenhuma transmissão ao vivo encontrada para este jogo.</p>`;
     } else {
@@ -184,4 +184,3 @@ function displayStreams(twitchStreams) {
         });
     }
 }
-
