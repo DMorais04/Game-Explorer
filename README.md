@@ -46,10 +46,14 @@ A sequência de procedimentos que leva à execução da aplicação é a seguint
 
 Antes de executar o projeto, é necessário configurar algumas chaves de API:
 
-## RAWG API
+#### RAWG API
 1. Aceder a [RAWG API Docs](https://rawg.io/apidocs).
+2. Clique em **Get API Key**.
+3. Efetue o Login na plataforma ou registe-se na mesma caso não possua conta.
+4. Aceda ao menu no canto superior direito e clique na opção **Get an API key**
+5. A API Key é então apresentada ao utilizador. 
 
-## YouTube Data API v3
+#### YouTube Data API v3
 1. Aceder a **YouTube Data API v3**: Obtenha sua chave de API em [Google Developers Console](https://console.developers.google.com/).
 2. Do lado esquerdo da barra de pesquisa, clique em **Selecionar Projeto**. Clique em **Novo Projeto**. Aí criarás um novo projeto preenchendo apenas o campo **Nome**.
 3. Por baixo da barra de pesquisa clique em **+ ATIVAR APIS E SERVIÇOS**.
@@ -58,12 +62,39 @@ Antes de executar o projeto, é necessário configurar algumas chaves de API:
 6. Após isso, será redirecionado para uma nova página onde deverá clicar em **CRIAR CREDENCIAIS** para gerar a API_KEY.
 7. Em **Que dados você acessará?** selecione **Dados Públicos**. Em seguida finalize o processo de criação de credenciais. Aí já possuirá a sua API_KEY.
 
-## Twitch API
+#### Twitch API
+Para aceder às funcionalidades desta API é necessário obter o **Client ID** e o **Client Secret**. Caso seja a primeira vez que efetue a obtenção destes, siga todos os passos mencionados abaixo. Caso contrário, siga apenas a partir do ponto 6. O **Client Secret** tem prazo de validade pelo que, quando este expirar, terá que o substituir no código. 
+
 1. Aceder a [Twitch Developer Console](https://dev.twitch.tv/console/apps).
+2. Faça Login ou Registe-se na Twitch caso não esteja conectado e/ou registado na plataforma.
+3. Clique em **+ Registre seu aplicativo**.
+4. Introduza o **Nome** do seu aplicativo e a **URLs de redirecionamento OAuth** (http://localhost:5000/callback).
+5. Selecione a Categoria **Website Integration** e o Tipo de Cliente **Confidencial**. Feito isso clique em **Criar**. Após a criação do aplicativo, o utilizador será encaminhado novamente para Consola.
+6. Na Consola, clique na opção **Gerenciar** referente ao aplicativo criado. Aí o utilizador será encaminhado para as propriedades do aplicativo criado.
+7. Agora, nas propriedades do aplicativo, no fundo da página, clique em **Novo Segredo/New Secret**. Aí será gerado o Client Secret.
+8. O Client ID já é visível assim que entra na página das propriedades do aplicativo. 
 
 ### Passos para Executar Localmente
 
 1. Clone este repositório:
 
    ```bash
-   git clone https://github.com/seu-usuario/nome-do-repositorio.git
+   git clone https://github.com/DMorais04/SIR-TP1.git
+
+2. Entre na pasta do projeto:
+
+   ```bash
+   cd nome-da-pasta-do-projeto
+
+3. Instale as dependências necessárias:
+
+   ```bash
+   npm install
+
+4. Configure as API key, substituindo-as nas primeiras quatro linhas do ficheiro **base.js**.
+   
+5. Após tudo instalado e configurado, inicie o programa introduzindo:
+
+   ```bash
+   npm start
+
