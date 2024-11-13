@@ -1,7 +1,7 @@
-const RAWG_API_KEY = '4c67c848c06b406589a1b89459294d37';
-const YOUTUBE_API_KEY = 'AIzaSyDQWonLNrlHk890r1Sct5HxttR3wydHL30';
-const TWITCH_CLIENT_ID = 'jdd09rs52rnps5uvwzpv3rk91oew3v';
-const TWITCH_CLIENT_SECRET = 'l4kx11lgacqomx9kocacz4cuewczda';
+const RAWG_API_KEY = ''; //Preencher com a sua RAWG_API_KEY
+const YOUTUBE_API_KEY = ''; //Preencher com a sua YOUTUBE_API_KEY
+const TWITCH_CLIENT_ID = ''; //Preencher com o seu TWITCH_CLIENT_ID
+const TWITCH_CLIENT_SECRET = ''; //Preencher com o seu TWITCH_CLIENT_SECRET 
 
 let accessToken = null;
 let tokenExpiry = null;
@@ -10,7 +10,7 @@ document.getElementById('searchBtn').addEventListener('click', async function() 
     const game = document.getElementById('gameInput').value;
 
     if (!game) {
-        alert("Por favor, digite o nome de um jogo!");
+        alert("Por favor, introduza um jogo!");
         return;
     }
 
@@ -172,7 +172,7 @@ function displayStreams(twitchStreams) {
 
             streamsSection.innerHTML += `
                 <div style="margin-bottom: 20px;">
-                    <p><strong>${streamUserName}</strong> - ${stream.viewer_count} espectadores</p>
+                    <p><strong>${streamUserName}</strong> - ${stream.viewer_count} spectators</p>
                     <iframe 
                         src="https://player.twitch.tv/?channel=${streamUserName}&parent=127.0.0.1&autoplay=false" 
                         height="300" 
