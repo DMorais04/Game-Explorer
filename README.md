@@ -12,7 +12,7 @@ Este projeto foi desenvolvido por:
 - [https://github.com/DMorais04/SIR-TP1.git](https://github.com/DMorais04/SIR-TP1.git)
 
 ### Endereço de Publicação
-- [https://github.com/DMorais04/SIR-TP1.git](https://github.com/DMorais04/SIR-TP1.git)
+- [https://sir-tp1-n29324.onrender.com](https://sir-tp1-n29324.onrender.com)
 
 ### APIs Utilizadas
 
