@@ -63,7 +63,7 @@ Antes de executar o projeto, é necessário configurar algumas chaves de API:
 7. Em **Que dados você acessará?** selecione **Dados Públicos**. Em seguida finalize o processo de criação de credenciais. Aí já possuirá a sua API_KEY.
 
 #### Twitch API
-Para aceder às funcionalidades desta API é necessário obter o **Client ID** e o **Client Secret**. Caso seja a primeira vez que efetue a obtenção destes, siga todos os passos mencionados abaixo. Caso contrário, siga apenas a partir do ponto 6. O **Client Secret** tem prazo de validade pelo que, quando este expirar, terá que o substituir no código. 
+Para aceder às funcionalidades desta API é necessário obter um **Access Token**, obtido através do **Client ID** e do **Client Secret**. O **Client Secret** tem prazo de validade pelo que, quando este expirar, terá que renovar o **Access Token**, através da criação de um novo **Client Secret**. Caso seja a primeira vez que efetue a obtenção destes, siga todos os passos mencionados abaixo. Caso contrário, siga apenas a partir do ponto 6. 
 
 1. Aceder a [Twitch Developer Console](https://dev.twitch.tv/console/apps).
 2. Faça Login ou Registe-se na Twitch caso não esteja conectado e/ou registado na plataforma.
