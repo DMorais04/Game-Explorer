@@ -1,7 +1,7 @@
-const RAWG_API_KEY = ''; //Preencher com a sua RAWG_API_KEY
-const YOUTUBE_API_KEY = ''; //Preencher com a sua YOUTUBE_API_KEY
-const TWITCH_CLIENT_ID = ''; //Preencher com o seu TWITCH_CLIENT_ID
-const TWITCH_CLIENT_SECRET = ''; //Preencher com o seu TWITCH_CLIENT_SECRET 
+const RAWG_API_KEY = process.env.RAWG_API_KEY || ''; //Preencher com a sua RAWG_API_KEY
+const YOUTUBE_API_KEY = process.env.YOUTUBE_API_KEY || ''; //Preencher com a sua YOUTUBE_API_KEY
+const TWITCH_CLIENT_ID = process.env.TWITCH_CLIENT_ID || ''; //Preencher com o seu TWITCH_CLIENT_ID
+const TWITCH_CLIENT_SECRET = process.env.TWITCH_CLIENT_SECRET || ''; //Preencher com o seu TWITCH_CLIENT_SECRET 
 
 let accessToken = null;
 let tokenExpiry = null;
