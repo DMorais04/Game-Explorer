@@ -11,9 +11,6 @@ Este projeto foi desenvolvido por:
 ### Repositório GitHub
 - [https://github.com/DMorais04/SIR-TP1.git](https://github.com/DMorais04/SIR-TP1.git)
 
-### Endereço de Publicação
-- [https://sir-tp1-n29324.onrender.com](https://sir-tp1-n29324.onrender.com)
-
 ### APIs Utilizadas
 
 O projeto integra três APIs principais, sendo que cada uma delas atua em função da String introduzida na barra de pesquisa:
